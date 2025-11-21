@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import ThemeToggle from './ThemeToggle.jsx';
 
-function Form({ onSubmit }){
+function Form({ onSubmit, darkMode, setDarkMode }){
     
     const [Gender, setGender]= useState('');
     const [BodyFat, setBodyFat]= useState(0);
@@ -49,8 +50,12 @@ function Form({ onSubmit }){
     }
 
     return(
-        <div className="bg-gray-800  text-white p-5 font-sans ">
+        <div className={`${darkMode ? 'bg-gray-800' : 'bg-white'} ${darkMode ? 'text-white' : 'text-gray-900'} p-8 rounded-lg shadow-lg font-sans transition-colors duration-300 relative card-transition`}>
+            
+            <ThemeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
+            
             <form onSubmit={handleSubmit}>
+            
                 {/*Gender Radio Buttons*/}
                 <div className="mb-2.5">
                     <label className="block mb-2.5">
@@ -93,11 +98,11 @@ function Form({ onSubmit }){
                             onChange={selectBodyFat}
                             min="0"
                             max="100"
-                            className="flex-1 accent-green-400"
+                            className="flex-1 accent-green-400 "
                         />
                         <span className="text-lg font-bold">{BodyFat}</span>
                     </div>
-                    <div className="text-sm text-gray-300 mt-1.5">
+                    <div className={`text-sm mt-1.5 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                         Enter your estimated body fat percentage (0-100).
                     </div>
                 </div>
@@ -118,7 +123,7 @@ function Form({ onSubmit }){
                         />
                         <span className="text-lg font-bold">{BMI}</span>
                     </div>
-                    <div className="text-sm text-gray-300 mt-1.5">
+                    <div className={`text-sm mt-1.5 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                         Enter your Body Mass Index (0-40).
                     </div>
                 </div>
@@ -130,7 +135,7 @@ function Form({ onSubmit }){
                     </label>
                     <input 
                         type="number"
-                        className="w-full p-2.5 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:border-green-400"
+                        className={`w-full p-2.5 rounded border focus:outline-none focus:border-green-400 ${darkMode ? 'bg-gray-700 text-white border-gray-600' : 'bg-gray-50 text-gray-900 border-gray-300'}`}
                         placeholder="e.g. 2000"
                         value={Calorie}
                         onChange={selectCalorie}
@@ -144,7 +149,7 @@ function Form({ onSubmit }){
                         Cups of Water Per Day <span className="text-red-500">*</span>
                     </label>
                     <select 
-                        className="w-full p-2.5 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:border-green-400"
+                        className={`w-full p-2.5 rounded border focus:outline-none focus:border-green-400 ${darkMode ? 'bg-gray-700 text-white border-gray-600' : 'bg-gray-50 text-gray-900 border-gray-300'}`}
                         value={WaterCups}
                         onChange={selectWaterCups}
                     >
@@ -167,7 +172,7 @@ function Form({ onSubmit }){
                     </label>
                     <input 
                         type="number"
-                        className="w-full p-2.5 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:border-green-400"
+                        className={`w-full p-2.5 rounded border focus:outline-none focus:border-green-400 ${darkMode ? 'bg-gray-700 text-white border-gray-600' : 'bg-gray-50 text-gray-900 border-gray-300'}`}
                         placeholder="e.g. 1.5"
                         value={WeightLoss}
                         onChange={selectWeightLoss}
@@ -183,7 +188,7 @@ function Form({ onSubmit }){
                     </label>
                     <input 
                         type="number"
-                        className="w-full p-2.5 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:border-green-400"
+                        className={`w-full p-2.5 rounded border focus:outline-none focus:border-green-400 ${darkMode ? 'bg-gray-700 text-white border-gray-600' : 'bg-gray-50 text-gray-900 border-gray-300'}`}
                         placeholder="e.g. 30"
                         value={DaysToResults}
                         onChange={selectDaysToResults}
@@ -195,7 +200,7 @@ function Form({ onSubmit }){
 
                 <button
                     type="submit"
-                    className="w-full bg-white text-gray-800 font-bold py-2.5 rounded hover:bg-gray-100 transition-colors"
+                    className={`w-full mt-2.5 font-bold py-2.5 h-auto rounded-2xl transition-colors ${darkMode ? 'bg-white text-gray-800 hover:bg-gray-100' : 'bg-sky-400 text-white hover:bg-sky-500'}`}
                 >See My Results</button>
             </form>
         </div>
