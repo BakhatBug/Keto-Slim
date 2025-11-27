@@ -18,7 +18,15 @@ export const ThemeProvider = ({ children }) => {
   // Initialize darkMode from localStorage or default to false
   const [darkMode, setDarkMode] = useState(() => {
     const savedTheme = localStorage.getItem("darkMode");
-    return savedTheme ? JSON.parse(savedTheme) : false;
+    if (savedTheme) {
+      try {
+        return JSON.parse(savedTheme);
+      } catch (error) {
+        // If invalid JSON, default to false
+        return false;
+      }
+    }
+    return false;
   });
 
   // Save darkMode to localStorage whenever it changes
