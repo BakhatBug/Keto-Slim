@@ -1,20 +1,48 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 #root {
   width: 100%;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Page transition animations */
+.page-transition {
+  animation: slideInPage 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
+  max-width: 100vw;
+}
+
+@keyframes slideInPage {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 /* Card transition animations */
 .card-transition {
-  animation: slideInFromRight 0.5s ease-out;
+  animation: slideInCard 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
+  position: relative;
 }
 
-@keyframes slideInFromRight {
+@keyframes slideInCard {
   from {
     opacity: 0;
-    transform: translateX(100%);
+    transform: translateX(20px);
   }
   to {
     opacity: 1;

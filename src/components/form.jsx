@@ -1,210 +1,368 @@
 import React, { useState } from 'react';
-import ThemeToggle from './ThemeToggle.jsx';
+import PropTypes from 'prop-types';
+import { useTheme } from '../contexts/ThemeContext.jsx';
 
-function Form({ onSubmit, darkMode, setDarkMode }){
-    
-    const [Gender, setGender]= useState('');
-    const [BodyFat, setBodyFat]= useState(0);
-    const [Calorie, setCalorie]= useState(0);
-    const [WaterCups, setWaterCups] = useState(0);
-    const [WeightLoss, setWeightLoss] = useState(0);
-    const [DaysToResults, setDaysToResults] = useState(0);
-    const [BMI, setBMI] = useState(0);
+function Form({ onSubmit }) {
+  const { darkMode } = useTheme();
+  const [Gender, setGender] = useState('');
+  const [BodyFat, setBodyFat] = useState(0);
+  const [Calorie, setCalorie] = useState('');
+  const [WaterCups, setWaterCups] = useState('');
+  const [WeightLoss, setWeightLoss] = useState('');
+  const [DaysToResults, setDaysToResults] = useState('');
+  const [BMI, setBMI] = useState(0);
 
-    const selectBodyFat= (e)=>{
-        setBodyFat(e.target.value)
+  const selectBodyFat = (e) => {
+    setBodyFat(e.target.value);
+  };
+
+  const selectGender = (e) => {
+    setGender(e.target.value);
+  };
+
+  const selectBMI = (e) => {
+    setBMI(e.target.value);
+  };
+
+  const selectCalorie = (e) => {
+    setCalorie(e.target.value);
+  };
+
+  const selectWaterCups = (e) => {
+    setWaterCups(e.target.value);
+  };
+
+  const selectWeightLoss = (e) => {
+    setWeightLoss(e.target.value);
+  };
+
+  const selectDaysToResults = (e) => {
+    setDaysToResults(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = { Gender, BodyFat, BMI, Calorie, WaterCups, WeightLoss, DaysToResults };
+    console.log('Form data:', data);
+
+    if (onSubmit) {
+      onSubmit(data);
     }
+  };
 
-    const selectGender = (e)=>{
-        setGender(e.target.value);
-    }
-    
-    const selectBMI = (e) => {
-        setBMI(e.target.value);
-    }
+  const isFormValid = () => {
+    return (
+      Gender !== '' &&
+      BodyFat > 0 &&
+      BMI > 0 &&
+      Calorie !== '' &&
+      parseFloat(Calorie) > 0 &&
+      WaterCups !== '' &&
+      WeightLoss !== '' &&
+      parseFloat(WeightLoss) > 0 &&
+      DaysToResults !== '' &&
+      parseInt(DaysToResults) > 0
+    );
+  };
 
-    const selectCalorie = (e)=>{
-        setCalorie(e.target.value);
-    }
-    
-    const selectWaterCups = (e) => {
-        setWaterCups(e.target.value);
-    }
-
-    const selectWeightLoss = (e) => {
-        setWeightLoss(e.target.value);
-    }
-
-    const selectDaysToResults = (e) => {
-        setDaysToResults(e.target.value);
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const data = { Gender, BodyFat, BMI, Calorie, WaterCups, WeightLoss, DaysToResults };
-        console.log('Form data:', data);
-        
-        if (onSubmit) {
-            onSubmit(data);
-        }
-    }
-
-    return(
-        <div className={`${darkMode ? 'bg-gray-800' : 'bg-white'} ${darkMode ? 'text-white' : 'text-gray-900'} p-8 rounded-lg shadow-lg font-sans transition-colors duration-300 relative card-transition`}>
-            
-            <ThemeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
-            
-            <form onSubmit={handleSubmit}>
-            
-                {/*Gender Radio Buttons*/}
-                <div className="mb-2.5">
-                    <label className="block mb-2.5">
-                        Gender <span className="text-red-500">*</span>
-                    </label>
-                    <label className="mr-5">
-                        <input
-                            type="radio"
-                            name="gender"
-                            value="male"
-                            checked={Gender === 'male'}
-                            onChange={selectGender}
-                            className="mr-1.5"
-                        />
-                        Male
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            name="gender"
-                            value="female"
-                            checked={Gender === 'female'}
-                            onChange={selectGender}
-                            className="mr-1.5"
-                            
-                        />
-                        Female
-                    </label>
-                </div>
-
-                {/*Body Fat Slider*/}
-                <div className="mb-5">
-                    <label className="block mb-2.5">
-                        Body Fat % <span className="text-red-500">*</span>
-                    </label>
-                    <div className="flex items-center gap-2.5">
-                        <input 
-                            type="range"
-                            value={BodyFat}
-                            onChange={selectBodyFat}
-                            min="0"
-                            max="100"
-                            className="flex-1 accent-green-400 "
-                        />
-                        <span className="text-lg font-bold">{BodyFat}</span>
-                    </div>
-                    <div className={`text-sm mt-1.5 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                        Enter your estimated body fat percentage (0-100).
-                    </div>
-                </div>
-
-                {/* BMI Slider */}
-                <div className="mb-5">
-                    <label className="block mb-2.5">
-                        BMI <span className="text-red-500">*</span>
-                    </label>
-                    <div className="flex items-center gap-2.5">
-                        <input 
-                            type="range"
-                            value={BMI}
-                            onChange={selectBMI}
-                            min="0"
-                            max="40"
-                            className="flex-1 accent-green-400"
-                        />
-                        <span className="text-lg font-bold">{BMI}</span>
-                    </div>
-                    <div className={`text-sm mt-1.5 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                        Enter your Body Mass Index (0-40).
-                    </div>
-                </div>
-                
-                {/* Daily Calorie Target*/}
-                <div className="mb-5">
-                    <label className="block mb-2.5">
-                        Daily Calorie Target <span className="text-red-500">*</span>
-                    </label>
-                    <input 
-                        type="number"
-                        className={`w-full p-2.5 rounded border focus:outline-none focus:border-green-400 ${darkMode ? 'bg-gray-700 text-white border-gray-600' : 'bg-gray-50 text-gray-900 border-gray-300'}`}
-                        placeholder="e.g. 2000"
-                        value={Calorie}
-                        onChange={selectCalorie}
-                        min= "0"
-                    />
-                </div>
-
-                {/* Cups of Water Per Day */}
-                <div className="mb-10">
-                    <label className="block mb-2.5">
-                        Cups of Water Per Day <span className="text-red-500">*</span>
-                    </label>
-                    <select 
-                        className={`w-full p-2.5 rounded border focus:outline-none focus:border-green-400 ${darkMode ? 'bg-gray-700 text-white border-gray-600' : 'bg-gray-50 text-gray-900 border-gray-300'}`}
-                        value={WaterCups}
-                        onChange={selectWaterCups}
-                    >
-                        <option value="">Select cups</option>
-                        <option value="1">1 cup</option>
-                        <option value="2">2 cups</option>
-                        <option value="3">3 cups</option>
-                        <option value="4">4 cups</option>
-                        <option value="5">5 cups</option>
-                        <option value="6">6 cups</option>
-                        <option value="7">7 cups</option>
-                        <option value="8">8 cups</option>
-                    </select>
-                </div>
-
-                {/* Weekly Weight Loss Goal */}
-                <div className="mb-5">
-                    <label className="block mb-2.5">
-                        Weekly Weight Loss Goal (lbs) <span className="text-red-500">*</span>
-                    </label>
-                    <input 
-                        type="number"
-                        className={`w-full p-2.5 rounded border focus:outline-none focus:border-green-400 ${darkMode ? 'bg-gray-700 text-white border-gray-600' : 'bg-gray-50 text-gray-900 border-gray-300'}`}
-                        placeholder="e.g. 1.5"
-                        value={WeightLoss}
-                        onChange={selectWeightLoss}
-                        min="0"
-                        step="0.1"
-                    />
-                </div>
-
-                {/* Days to See Results */}
-                <div className="mb-5">
-                    <label className="block mb-2.5">
-                        Days to See Results <span className="text-red-500">*</span>
-                    </label>
-                    <input 
-                        type="number"
-                        className={`w-full p-2.5 rounded border focus:outline-none focus:border-green-400 ${darkMode ? 'bg-gray-700 text-white border-gray-600' : 'bg-gray-50 text-gray-900 border-gray-300'}`}
-                        placeholder="e.g. 30"
-                        value={DaysToResults}
-                        onChange={selectDaysToResults}
-                        min="1"
-                    />
-                </div>
-
-                {/* Submit Button */}
-
-                <button
-                    type="submit"
-                    className={`w-full mt-2.5 font-bold py-2.5 h-auto rounded-2xl transition-colors ${darkMode ? 'bg-white text-gray-800 hover:bg-gray-100' : 'bg-sky-400 text-white hover:bg-sky-500'}`}
-                >See My Results</button>
-            </form>
+  return (
+    <form
+      onSubmit={handleSubmit}
+      className="shadow-xl rounded-2xl p-4 sm:p-8 w-full max-w-xl space-y-6 border card-transition"
+      aria-label="Results Input Form"
+      noValidate
+      style={{
+        background: darkMode ? 'rgb(35, 38, 39)' : 'rgb(255, 255, 255)',
+        borderColor: darkMode ? 'rgb(45, 49, 51)' : 'rgb(229, 231, 235)',
+        color: darkMode ? 'rgb(248, 244, 244)' : 'rgb(24, 59, 73)',
+      }}
+    >
+      {/* Gender Radio Buttons */}
+      <fieldset className="mb-4" aria-required="true">
+        <legend
+          className="block text-sm font-medium mb-1"
+          style={{ color: darkMode ? 'rgb(248, 244, 244)' : 'rgb(24, 59, 73)' }}
+        >
+          Gender
+          <span aria-label="required" className="ml-1" style={{ color: 'rgb(247, 89, 80)' }}>
+            *
+          </span>
+        </legend>
+        <div className="flex gap-4">
+          <label
+            className="flex items-center gap-1 cursor-pointer"
+            style={{ color: darkMode ? 'rgb(248, 244, 244)' : 'rgb(24, 59, 73)' }}
+          >
+            <input
+              required
+              aria-required="true"
+              type="radio"
+              value="male"
+              name="gender"
+              checked={Gender === 'male'}
+              onChange={selectGender}
+              className="w-4 h-4"
+              style={{ accentColor: 'rgb(54, 188, 159)' }}
+            />
+            <span>Male</span>
+          </label>
+          <label
+            className="flex items-center gap-1 cursor-pointer"
+            style={{ color: darkMode ? 'rgb(248, 244, 244)' : 'rgb(24, 59, 73)' }}
+          >
+            <input
+              required
+              aria-required="true"
+              type="radio"
+              value="female"
+              name="gender"
+              checked={Gender === 'female'}
+              onChange={selectGender}
+              className="w-4 h-4"
+              style={{ accentColor: 'rgb(54, 188, 159)' }}
+            />
+            <span>Female</span>
+          </label>
         </div>
-    )
+      </fieldset>
+
+      {/* Body Fat Slider */}
+      <div className="mb-2">
+        <label
+          htmlFor="bodyFatPercent"
+          className="block text-sm font-medium mb-1"
+          style={{ color: darkMode ? 'rgb(248, 244, 244)' : 'rgb(24, 59, 73)' }}
+        >
+          Body Fat %
+          <span aria-label="required" className="ml-1" style={{ color: 'rgb(247, 89, 80)' }}>
+            *
+          </span>
+        </label>
+        <div className="flex items-center gap-3">
+          <input
+            id="bodyFatPercent"
+            min="0"
+            max="100"
+            step="1"
+            required
+            aria-required="true"
+            aria-valuenow={BodyFat}
+            aria-valuemin="0"
+            aria-valuemax="100"
+            className="flex-1"
+            type="range"
+            value={BodyFat}
+            name="bodyFatPercent"
+            onChange={selectBodyFat}
+            style={{ accentColor: 'rgb(54, 188, 159)' }}
+          />
+          <span className="w-12 text-right" style={{ color: 'rgb(181, 194, 201)' }}>
+            {BodyFat}
+          </span>
+        </div>
+      </div>
+      <div className="text-xs" style={{ color: 'rgb(181, 194, 201)' }}>
+        Enter your estimated body fat percentage (0-100).
+      </div>
+
+      {/* BMI Slider */}
+      <div className="mb-2">
+        <label
+          htmlFor="BMI"
+          className="block text-sm font-medium mb-1"
+          style={{ color: darkMode ? 'rgb(248, 244, 244)' : 'rgb(24, 59, 73)' }}
+        >
+          BMI
+          <span aria-label="required" className="ml-1" style={{ color: 'rgb(247, 89, 80)' }}>
+            *
+          </span>
+        </label>
+        <div className="flex items-center gap-3">
+          <input
+            id="BMI"
+            min="0"
+            max="40"
+            step="1"
+            required
+            aria-required="true"
+            aria-valuenow={BMI}
+            aria-valuemin="0"
+            aria-valuemax="40"
+            className="flex-1"
+            type="range"
+            value={BMI}
+            name="BMI"
+            onChange={selectBMI}
+            style={{ accentColor: 'rgb(54, 188, 159)' }}
+          />
+          <span className="w-12 text-right" style={{ color: 'rgb(181, 194, 201)' }}>
+            {BMI}
+          </span>
+        </div>
+      </div>
+      <div className="text-xs" style={{ color: 'rgb(181, 194, 201)' }}>
+        Enter your Body Mass Index (0-40).
+      </div>
+
+      {/* Daily Calorie Target */}
+      <div className="mb-4">
+        <label
+          htmlFor="calorieTarget"
+          className="block text-sm font-medium mb-1"
+          style={{ color: darkMode ? 'rgb(248, 244, 244)' : 'rgb(24, 59, 73)' }}
+        >
+          Daily Calorie Target
+          <span aria-label="required" className="ml-1" style={{ color: 'rgb(247, 89, 80)' }}>
+            *
+          </span>
+        </label>
+        <input
+          id="calorieTarget"
+          min="0"
+          required
+          placeholder="e.g. 2000"
+          className="w-full rounded px-3 py-2 transition"
+          aria-required="true"
+          type="number"
+          value={Calorie}
+          name="calorieTarget"
+          onChange={selectCalorie}
+          style={{
+            background: darkMode ? 'rgb(35, 38, 39)' : 'rgb(255, 255, 255)',
+            color: darkMode ? 'rgb(248, 244, 244)' : 'rgb(24, 59, 73)',
+            border: `1px solid ${darkMode ? 'rgb(45, 49, 51)' : 'rgb(229, 231, 235)'}`,
+          }}
+        />
+      </div>
+
+      {/* Cups of Water Per Day */}
+      <div className="mb-4">
+        <label
+          htmlFor="waterIntake"
+          className="block text-sm font-medium mb-1"
+          style={{ color: darkMode ? 'rgb(248, 244, 244)' : 'rgb(24, 59, 73)' }}
+        >
+          Cups of Water Per Day
+          <span aria-label="required" className="ml-1" style={{ color: 'rgb(247, 89, 80)' }}>
+            *
+          </span>
+        </label>
+        <select
+          id="waterIntake"
+          name="waterIntake"
+          required
+          aria-required="true"
+          className="w-full rounded px-3 py-2 transition h-[43px]"
+          value={WaterCups}
+          onChange={selectWaterCups}
+          style={{
+            background: darkMode ? 'rgb(35, 38, 39)' : 'rgb(255, 255, 255)',
+            color: darkMode ? 'rgb(248, 244, 244)' : 'rgb(24, 59, 73)',
+            border: `1px solid ${darkMode ? 'rgb(45, 49, 51)' : 'rgb(229, 231, 235)'}`,
+          }}
+        >
+          <option value="">Select cups</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="4">4</option>
+          <option value="6">6</option>
+        </select>
+      </div>
+
+      {/* Weekly Weight Loss Goal */}
+      <div className="mb-4">
+        <label
+          htmlFor="weightLossRate"
+          className="block text-sm font-medium mb-1"
+          style={{ color: darkMode ? 'rgb(248, 244, 244)' : 'rgb(24, 59, 73)' }}
+        >
+          Weekly Weight Loss Goal (lbs)
+          <span aria-label="required" className="ml-1" style={{ color: 'rgb(247, 89, 80)' }}>
+            *
+          </span>
+        </label>
+        <input
+          id="weightLossRate"
+          min="0"
+          required
+          step="0.1"
+          placeholder="e.g. 1.5"
+          className="w-full rounded px-3 py-2 transition"
+          aria-required="true"
+          type="number"
+          value={WeightLoss}
+          name="weightLossRate"
+          onChange={selectWeightLoss}
+          style={{
+            background: darkMode ? 'rgb(35, 38, 39)' : 'rgb(255, 255, 255)',
+            color: darkMode ? 'rgb(248, 244, 244)' : 'rgb(24, 59, 73)',
+            border: `1px solid ${darkMode ? 'rgb(45, 49, 51)' : 'rgb(229, 231, 235)'}`,
+          }}
+        />
+      </div>
+
+      {/* Days to See Results */}
+      <div className="mb-4">
+        <label
+          htmlFor="seeResultsDays"
+          className="block text-sm font-medium mb-1"
+          style={{ color: darkMode ? 'rgb(248, 244, 244)' : 'rgb(24, 59, 73)' }}
+        >
+          Days to See Results
+          <span aria-label="required" className="ml-1" style={{ color: 'rgb(247, 89, 80)' }}>
+            *
+          </span>
+        </label>
+        <input
+          id="seeResultsDays"
+          min="1"
+          required
+          placeholder="e.g. 30"
+          className="w-full rounded px-3 py-2 transition"
+          aria-required="true"
+          type="number"
+          value={DaysToResults}
+          name="seeResultsDays"
+          onChange={selectDaysToResults}
+          style={{
+            background: darkMode ? 'rgb(35, 38, 39)' : 'rgb(255, 255, 255)',
+            color: darkMode ? 'rgb(248, 244, 244)' : 'rgb(24, 59, 73)',
+            border: `1px solid ${darkMode ? 'rgb(45, 49, 51)' : 'rgb(229, 231, 235)'}`,
+          }}
+        />
+      </div>
+
+      {/* Submit Button */}
+      <button
+        type="submit"
+        className="w-full mt-4 text-lg font-semibold py-3 rounded-xl transition disabled:opacity-50 font-inter hover:opacity-90 focus:outline-none focus:ring-2 cursor-pointer"
+        disabled={!isFormValid()}
+        aria-disabled={!isFormValid()}
+        aria-label="See My Results"
+        style={{
+          background: 'rgb(54, 188, 159)',
+          color: 'rgb(255, 255, 255)',
+          border: '1px solid rgb(54, 188, 159)',
+        }}
+      >
+        See My Results
+      </button>
+
+      <div
+        className="text-xs mt-2 text-center font-inter"
+        aria-live="polite"
+        style={{ color: 'rgb(181, 194, 201)' }}
+      >
+        {isFormValid()
+          ? 'All fields completed! Ready to see your results.'
+          : 'Please fill out all required fields to enable the button.'}
+      </div>
+    </form>
+  );
 }
+
+Form.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
 
 export default Form;

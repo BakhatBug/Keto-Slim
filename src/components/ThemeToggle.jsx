@@ -1,21 +1,26 @@
 import React from 'react';
+import { useTheme } from '../contexts/ThemeContext.jsx';
 
-function ThemeToggle({ darkMode, setDarkMode }) {
-    return (
-        <button
-            onClick={() => setDarkMode(!darkMode)}
-            className={`fixed top-4 right-4 z-50 px-6 py-2 rounded-full shadow-lg hover:shadow-xl transition-all border-2 font-semibold ${
-                darkMode 
-                    ? 'bg-white text-gray-900 border-gray-300 hover:bg-gray-100' 
-                    : 'bg-gray-900 text-white border-gray-700 hover:bg-gray-800'
-            }`}
-            aria-label="Toggle theme"
-        >
-            {darkMode ? 'Light Mode' : 'Dark Mode'}
-        </button>
-    );
+function ThemeToggle() {
+  // Get theme from Context - no props needed!
+  const { darkMode, toggleDarkMode } = useTheme();
+
+  return (
+    <button
+      onClick={toggleDarkMode}
+      className="fixed top-4 right-4 z-50 px-4 py-2 rounded-lg font-semibold transition"
+      aria-label="Toggle dark mode"
+      type="button"
+      style={{
+        background: darkMode ? 'rgb(35, 38, 39)' : 'rgb(255, 255, 255)',
+        color: darkMode ? 'rgb(248, 244, 244)' : 'rgb(24, 59, 73)',
+        border: '2px solid rgb(229, 231, 235)',
+        cursor: 'pointer',
+      }}
+    >
+      {darkMode ? 'Light Mode' : 'Dark Mode'}
+    </button>
+  );
 }
 
 export default ThemeToggle;
-
-

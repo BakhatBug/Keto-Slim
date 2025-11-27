@@ -1,53 +1,53 @@
-import { useState } from 'react'
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import logo from './assets/images/ketoslim.png'
-import './App.css'
-import Form from './components/form.jsx'
-import ResultsDisplay from './components/ResultsDisplay.jsx'
-import BMIDisplay from './components/BMIDisplay.jsx'
-import CaloriesDisplay from './components/CaloriesDisplay.jsx'
-import WaterDisplay from './components/WaterDisplay.jsx'
-import WeightLossDisplay from './components/WeightLossDisplay.jsx'
-import ResultsTimelineDisplay from './components/ResultsTimelineDisplay.jsx'
-import FinalPlanPage from './components/FinalPlanPage.jsx'
-
+import { useState, useEffect, useRef } from 'react';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import logo from './assets/images/ketoslim.png';
+import './App.css';
+import Form from './components/form.jsx';
+import ResultsDisplay from './components/ResultsDisplay.jsx';
+import BMIDisplay from './components/BMIDisplay.jsx';
+import CaloriesDisplay from './components/CaloriesDisplay.jsx';
+import WaterDisplay from './components/WaterDisplay.jsx';
+import WeightLossDisplay from './components/WeightLossDisplay.jsx';
+import ResultsTimelineDisplay from './components/ResultsTimelineDisplay.jsx';
+import FinalPlanPage from './components/FinalPlanPage.jsx';
+import ThemeToggle from './components/ThemeToggle.jsx';
+import { useTheme } from './contexts/ThemeContext.jsx';
 
 function App() {
-  // Initialize currentPage from localStorage or default to 'form'
-  const [currentPage, setCurrentPage] = useState(() => {
-    const savedPage = localStorage.getItem('currentPage');
-    return savedPage || 'form';
-  });
-  
-  // Initialize formData from localStorage or default to null
-  const [formData, setFormData] = useState(() => {
-    const savedData = localStorage.getItem('formData');
-    return savedData ? JSON.parse(savedData) : null;
-  });
-  
-  // Initialize darkMode from localStorage or default to false
-  const [darkMode, setDarkMode] = useState(() => {
-    const savedTheme = localStorage.getItem('darkMode');
-    return savedTheme ? JSON.parse(savedTheme) : false;
-  });
+  // Use Theme Context instead of local state
+  const { darkMode } = useTheme();
 
-  // Save darkMode to localStorage whenever it changes
-  React.useEffect(() => {
-    localStorage.setItem('darkMode', JSON.stringify(darkMode));
-  }, [darkMode]);
+  // Always start from form page - don't persist across sessions
+  const [currentPage, setCurrentPage] = useState('form');
 
-  // Save currentPage to localStorage whenever it changes
-  React.useEffect(() => {
-    localStorage.setItem('currentPage', currentPage);
+  // Don't persist form data across sessions
+  const [formData, setFormData] = useState(null);
+
+  // Ref for focus management
+  const mainContentRef = useRef(null);
+
+  // Focus management - focus main content when page changes
+  useEffect(() => {
+    if (mainContentRef.current) {
+      mainContentRef.current.focus();
+    }
+    // Announce page change to screen readers
+    const pageNames = {
+      form: 'Health Assessment Form',
+      bodyFat: 'Body Fat Results',
+      bmi: 'BMI Results',
+      calories: 'Calorie Recommendations',
+      water: 'Water Intake Recommendations',
+      weightLoss: 'Weight Loss Projections',
+      timeline: 'Results Timeline',
+      finalPlan: 'Your Personalized Plan',
+    };
+    document.title = `Keto Slim - ${pageNames[currentPage] || 'Health Assessment'}`;
   }, [currentPage]);
 
-  // Save formData to localStorage whenever it changes
-  React.useEffect(() => {
-    if (formData) {
-      localStorage.setItem('formData', JSON.stringify(formData));
-    }
-  }, [formData]);
+  // Don't persist currentPage and formData to localStorage
+  // This ensures fresh start when dev server restarts
 
   const handleFormSubmit = (data) => {
     setFormData(data);
@@ -107,62 +107,120 @@ function App() {
 
   const renderPage = () => {
     if (currentPage === 'bodyFat' && formData) {
-      return <ResultsDisplay formData={formData} onNext={handleBodyFatNext} darkMode={darkMode} setDarkMode={setDarkMode} />;
+      return (
+        <ResultsDisplay
+          formData={formData}
+          onNext={handleBodyFatNext}
+        />
+      );
     }
 
     if (currentPage === 'bmi' && formData) {
-      return <BMIDisplay formData={formData} onNext={handleBMINext} onBack={handleBMIBack} darkMode={darkMode} setDarkMode={setDarkMode} />;
+      return (
+        <BMIDisplay
+          formData={formData}
+          onNext={handleBMINext}
+          onBack={handleBMIBack}
+        />
+      );
     }
 
     if (currentPage === 'calories' && formData) {
-      return <CaloriesDisplay formData={formData} onNext={handleCaloriesNext} onBack={handleCaloriesBack} darkMode={darkMode} setDarkMode={setDarkMode} />;
+      return (
+        <CaloriesDisplay
+          formData={formData}
+          onNext={handleCaloriesNext}
+          onBack={handleCaloriesBack}
+        />
+      );
     }
 
     if (currentPage === 'water' && formData) {
-      return <WaterDisplay formData={formData} onNext={handleWaterNext} onBack={handleWaterBack} darkMode={darkMode} setDarkMode={setDarkMode} />;
+      return (
+        <WaterDisplay
+          formData={formData}
+          onNext={handleWaterNext}
+          onBack={handleWaterBack}
+        />
+      );
     }
 
     if (currentPage === 'weightLoss' && formData) {
-      return <WeightLossDisplay formData={formData} onNext={handleWeightLossNext} onBack={handleWeightLossBack} darkMode={darkMode} setDarkMode={setDarkMode} />;
+      return (
+        <WeightLossDisplay
+          formData={formData}
+          onNext={handleWeightLossNext}
+          onBack={handleWeightLossBack}
+        />
+      );
     }
 
     if (currentPage === 'resultsTimeline' && formData) {
-      return <ResultsTimelineDisplay formData={formData} onNext={handleResultsTimelineNext} onBack={handleResultsTimelineBack} darkMode={darkMode} setDarkMode={setDarkMode} />;
+      return (
+        <ResultsTimelineDisplay
+          formData={formData}
+          onNext={handleResultsTimelineNext}
+          onBack={handleResultsTimelineBack}
+        />
+      );
     }
 
     if (currentPage === 'finalPlan' && formData) {
-      return <FinalPlanPage formData={formData} darkMode={darkMode} setDarkMode={setDarkMode} onRestart={handleRestartForm} />;
+      return (
+        <FinalPlanPage
+          formData={formData}
+          onRestart={handleRestartForm}
+        />
+      );
     }
 
     return (
-      <div className={`min-h-screen w-full ${darkMode ? 'bg-gray-800' : 'bg-white'} text-white p-6`}>
-        {/*logo*/}
+      <div
+        className={`min-h-screen w-full flex flex-col items-center transition-colors duration-300 p-4 sm:p-8 ${
+          darkMode ? 'bg-[#0f1419]' : 'bg-[rgb(248,244,244)]'
+        }`}
+        role="application"
+        aria-label="Keto Slim health assessment application"
+      >
+        {/* Theme Toggle */}
+        <ThemeToggle />
 
-        <div className="text-center mb-8">
-          <img src={logo} alt="Keto Slim Logo" className="w-32 h-10 mx-auto my-4" />
-        </div>
+        {/* Logo */}
+        <header className="text-center mb-3 sm:mb-4">
+          <img src={logo} alt="Keto Slim Logo" className="w-28 h-9 sm:w-32 sm:h-10 mx-auto" />
+        </header>
 
-        {/*text below the logo*/}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold">
-            <span className="text-gray-500">Enter Your </span>
-            <span className="text-red-500">Details</span>
+        {/* Heading */}
+        <section className="text-center mb-5 sm:mb-6">
+          <h1
+            className={`text-2xl sm:text-3xl font-bold font-inter tracking-tight ${
+              darkMode ? 'text-white' : 'text-[rgb(24,59,73)]'
+            }`}
+            style={{ letterSpacing: '-0.5px' }}
+          >
+            <span>Enter Your </span>
+            <span className="text-[rgb(247,89,80)]">Details</span>
           </h1>
-        </div>
+        </section>
 
-        {/*form*/}
-        <div className="max-w-3xl mx-auto">
-          <Form onSubmit={handleFormSubmit} darkMode={darkMode} setDarkMode={setDarkMode} />
+        {/* Form */}
+        <div className="w-full max-w-xl px-4">
+          <Form onSubmit={handleFormSubmit} />
         </div>
       </div>
     );
   };
 
   return (
-    <div key={currentPage}>
+    <div
+      key={currentPage}
+      ref={mainContentRef}
+      tabIndex="-1"
+      className="focus:outline-none page-transition overflow-x-hidden w-full"
+    >
       {renderPage()}
     </div>
   );
 }
 
-export default App
+export default App;
