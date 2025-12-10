@@ -106,14 +106,16 @@ const WaterDisplay: React.FC<WaterDisplayProps> = ({ formData, onNext, onBack })
       {/* Title */}
       <h2
         id="water-title"
-        className={`text-2xl font-bold text-center mb-2 ${darkMode ? 'text-[rgb(248,244,244)]' : 'text-[rgb(24,59,73)]'
-          }`}
+        className={`text-2xl font-bold text-center mb-2 ${
+          darkMode ? 'text-[rgb(248,244,244)]' : 'text-[rgb(24,59,73)]'
+        }`}
       >
         Your Body Needs 8-9 Cups of Water Daily
       </h2>
       <p
-        className={`text-center font-semibold mb-6 ${darkMode ? 'text-[rgb(248,244,244)]' : 'text-[rgb(24,59,73)]'
-          }`}
+        className={`text-center font-semibold mb-6 ${
+          darkMode ? 'text-[rgb(248,244,244)]' : 'text-[rgb(24,59,73)]'
+        }`}
       >
         Here's Why That Matters
       </p>
@@ -126,19 +128,17 @@ const WaterDisplay: React.FC<WaterDisplayProps> = ({ formData, onNext, onBack })
       {/* Description Text */}
       <div className="space-y-4 mb-6 text-left">
         <p className={darkMode ? 'text-[rgb(181,194,201)]' : 'text-[rgb(19,85,111)]'}>
-          Hydration is a fat-burning multiplier. Without enough water, your body holds onto
-          toxins, slows digestion, and burns fat less efficiently.
+          Hydration is a fat-burning multiplier. Without enough water, your body holds onto toxins,
+          slows digestion, and burns fat less efficiently.
         </p>
         <p className={darkMode ? 'text-[rgb(181,194,201)]' : 'text-[rgb(19,85,111)]'}>
-          Even mild dehydration can feel like fatigue, hunger, or sugar cravings. You're not lazy
-          — you're likely underhydrated.
+          Even mild dehydration can feel like fatigue, hunger, or sugar cravings. You're not lazy —
+          you're likely underhydrated.
         </p>
-        <p className="text-sm text-[rgb(247,89,80)]">
-          {getWaterCallout()}
-        </p>
+        <p className="text-sm text-[rgb(247,89,80)]">{getWaterCallout()}</p>
       </div>
     </Card>
   );
-}
+};
 
 export default WaterDisplay;

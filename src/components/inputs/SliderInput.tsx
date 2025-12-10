@@ -13,7 +13,17 @@ interface SliderInputProps {
   required?: boolean;
 }
 
-const SliderInput: React.FC<SliderInputProps> = ({ label, id, min, max, step, value, onChange, helpText, required = false }) => {
+const SliderInput: React.FC<SliderInputProps> = ({
+  label,
+  id,
+  min,
+  max,
+  step,
+  value,
+  onChange,
+  helpText,
+  required = false,
+}) => {
   const { darkMode } = useTheme();
 
   return (
@@ -60,6 +70,6 @@ const SliderInput: React.FC<SliderInputProps> = ({ label, id, min, max, step, va
       )}
     </div>
   );
-}
+};
 
 export default SliderInput;

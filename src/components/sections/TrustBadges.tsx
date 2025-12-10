@@ -10,12 +10,14 @@ const TrustBadges: React.FC<TrustBadgesProps> = ({ pmcLogo, mayoLogo }) => {
   const { darkMode } = useTheme();
   return (
     <div
-      className={`w-full mt-8 pt-6 border-t ${darkMode ? 'border-[rgb(45,49,51)]' : 'border-gray-200'
-        }`}
+      className={`w-full mt-8 pt-6 border-t ${
+        darkMode ? 'border-[rgb(45,49,51)]' : 'border-gray-200'
+      }`}
     >
       <h3
-        className={`text-2xl font-bold text-center mb-6 ${darkMode ? 'text-[rgb(224,230,233)]' : 'text-[rgb(24,59,73)]'
-          }`}
+        className={`text-2xl font-bold text-center mb-6 ${
+          darkMode ? 'text-[rgb(224,230,233)]' : 'text-[rgb(24,59,73)]'
+        }`}
       >
         Trusted by health & nutrition professionals
       </h3>
@@ -53,6 +55,6 @@ const TrustBadges: React.FC<TrustBadgesProps> = ({ pmcLogo, mayoLogo }) => {
       </div>
     </div>
   );
-}
+};
 
 export default TrustBadges;

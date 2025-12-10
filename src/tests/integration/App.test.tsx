@@ -53,7 +53,7 @@ describe('Integration Tests', () => {
         calories: '1500',
         water: '6',
         weightLoss: '20',
-        days: '90'
+        days: '90',
       });
 
       // Wait for submit button to be enabled
@@ -64,9 +64,12 @@ describe('Integration Tests', () => {
       await user.click(submitButton);
 
       // Should navigate to results page
-      await waitFor(() => {
-        expect(screen.getByText(/25%/)).toBeInTheDocument();
-      }, { timeout: 3000 });
+      await waitFor(
+        () => {
+          expect(screen.getByText(/25%/)).toBeInTheDocument();
+        },
+        { timeout: 3000 }
+      );
     });
 
     it('should navigate through result pages', async () => {
@@ -86,7 +89,7 @@ describe('Integration Tests', () => {
         calories: '1400',
         water: '4',
         weightLoss: '15',
-        days: '60'
+        days: '60',
       });
 
       const submitButton = screen.getByRole('button', { name: /see my results/i });
@@ -94,17 +97,23 @@ describe('Integration Tests', () => {
       await user.click(submitButton);
 
       // Wait for first results page
-      await waitFor(() => {
-        expect(screen.getByText(/30%/)).toBeInTheDocument();
-      }, { timeout: 3000 });
+      await waitFor(
+        () => {
+          expect(screen.getByText(/30%/)).toBeInTheDocument();
+        },
+        { timeout: 3000 }
+      );
 
       // Click next to BMI page
       let nextButton = screen.getAllByRole('button', { name: /next/i })[0];
       await user.click(nextButton);
 
-      await waitFor(() => {
-        expect(screen.getByText(/32/)).toBeInTheDocument();
-      }, { timeout: 3000 });
+      await waitFor(
+        () => {
+          expect(screen.getByText(/32/)).toBeInTheDocument();
+        },
+        { timeout: 3000 }
+      );
     });
   });
 
@@ -141,5 +150,3 @@ describe('Integration Tests', () => {
     });
   });
 });
-
-

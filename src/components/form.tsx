@@ -6,9 +6,11 @@ import SliderInput from './inputs/SliderInput';
 import NumberInput from './inputs/NumberInput';
 import SelectInput from './inputs/SelectInput';
 
+//onSubmit is takes data and returns nothing
 interface FormProps {
   onSubmit: (data: any) => void;
 }
+//TypeScript type annotation saying "this is a React Functional Component that accepts props of type FormProps
 
 const Form: React.FC<FormProps> = ({ onSubmit }) => {
   const { darkMode } = useTheme();
@@ -88,10 +90,11 @@ const Form: React.FC<FormProps> = ({ onSubmit }) => {
 
   return (
     <article
-      className={`rounded-2xl shadow-xl border p-4 sm:p-8 w-full max-w-xl mx-auto flex flex-col items-center mb-6 transition-colors duration-300 ${darkMode
+      className={`rounded-2xl shadow-xl border p-4 sm:p-8 w-full max-w-xl mx-auto flex flex-col items-center mb-6 transition-colors duration-300 ${
+        darkMode
           ? 'bg-[#232627] border-[#2d3133] text-[#f8f4f4]'
           : 'bg-white border-gray-200 text-[#183b49]'
-        }`}
+      }`}
     >
       <form
         onSubmit={handleSubmit}
@@ -191,10 +194,7 @@ const Form: React.FC<FormProps> = ({ onSubmit }) => {
           See My Results
         </Button>
 
-        <div
-          className="text-xs mt-2 text-center font-inter text-[#b5c2c9]"
-          aria-live="polite"
-        >
+        <div className="text-xs mt-2 text-center font-inter text-[#b5c2c9]" aria-live="polite">
           {isFormValid()
             ? 'All fields completed! Ready to see your results.'
             : 'Please fill out all required fields to enable the button.'}
@@ -202,6 +202,6 @@ const Form: React.FC<FormProps> = ({ onSubmit }) => {
       </form>
     </article>
   );
-}
+};
 
 export default Form;

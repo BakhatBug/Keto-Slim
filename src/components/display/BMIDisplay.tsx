@@ -103,14 +103,16 @@ const BMIDisplay: React.FC<BMIDisplayProps> = ({ formData, onNext, onBack }) => 
 
       {/* Title */}
       <h2
-        className={`text-4xl font-bold text-center mb-2 ${darkMode ? 'text-[rgb(248,244,244)]' : 'text-[rgb(24,59,73)]'
-          }`}
+        className={`text-4xl font-bold text-center mb-2 ${
+          darkMode ? 'text-[rgb(248,244,244)]' : 'text-[rgb(24,59,73)]'
+        }`}
       >
         Your BMI Is {BMI}
       </h2>
       <p
-        className={`text-center font-semibold mb-6 ${darkMode ? 'text-[rgb(248,244,244)]' : 'text-[rgb(24,59,73)]'
-          }`}
+        className={`text-center font-semibold mb-6 ${
+          darkMode ? 'text-[rgb(248,244,244)]' : 'text-[rgb(24,59,73)]'
+        }`}
       >
         — What That Means
       </p>
@@ -123,20 +125,18 @@ const BMIDisplay: React.FC<BMIDisplayProps> = ({ formData, onNext, onBack }) => 
       {/* Description Text */}
       <div className="space-y-4 mb-6 text-left">
         <p className={darkMode ? 'text-[rgb(181,194,201)]' : 'text-[rgb(19,85,111)]'}>
-          BMI (Body Mass Index) is a quick way to estimate how your weight might affect your
-          health based on your height and weight.
+          BMI (Body Mass Index) is a quick way to estimate how your weight might affect your health
+          based on your height and weight.
         </p>
         <p className={darkMode ? 'text-[rgb(181,194,201)]' : 'text-[rgb(19,85,111)]'}>
           When your BMI is too high, your body may store more fat than it uses. That can slow your
           metabolism, drain your energy, and make fat loss harder — even if you're putting in
           effort.
         </p>
-        <p className="text-sm text-[rgb(247,89,80)]">
-          {getBMICallout()}
-        </p>
+        <p className="text-sm text-[rgb(247,89,80)]">{getBMICallout()}</p>
       </div>
     </Card>
   );
-}
+};
 
 export default BMIDisplay;

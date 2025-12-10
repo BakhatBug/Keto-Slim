@@ -7,7 +7,11 @@ interface ProgressIndicatorProps {
   label?: string;
 }
 
-const ProgressIndicator: React.FC<ProgressIndicatorProps> = ({ currentStep, totalSteps, label }) => {
+const ProgressIndicator: React.FC<ProgressIndicatorProps> = ({
+  currentStep,
+  totalSteps,
+  label,
+}) => {
   const { darkMode } = useTheme();
   return (
     <div className="flex justify-between items-center mb-3 mx-auto px-0 sm:mb-8">
@@ -22,13 +26,14 @@ const ProgressIndicator: React.FC<ProgressIndicatorProps> = ({ currentStep, tota
         {Array.from({ length: totalSteps }, (_, index) => (
           <div
             key={index}
-            className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full ${index < currentStep ? 'bg-teal-500' : 'bg-gray-300'
-              }`}
+            className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full ${
+              index < currentStep ? 'bg-teal-500' : 'bg-gray-300'
+            }`}
           ></div>
         ))}
       </div>
     </div>
   );
-}
+};
 
 export default ProgressIndicator;

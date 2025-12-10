@@ -13,7 +13,11 @@ interface ResultsTimelineDisplayProps {
   onBack: () => void;
 }
 
-const ResultsTimelineDisplay: React.FC<ResultsTimelineDisplayProps> = ({ formData, onNext, onBack }) => {
+const ResultsTimelineDisplay: React.FC<ResultsTimelineDisplayProps> = ({
+  formData,
+  onNext,
+  onBack,
+}) => {
   const { darkMode } = useTheme();
   const { DaysToResults } = formData;
 
@@ -90,14 +94,16 @@ const ResultsTimelineDisplay: React.FC<ResultsTimelineDisplayProps> = ({ formDat
       {/* Title */}
       <h2
         id="timeline-title"
-        className={`text-4xl font-bold text-center mb-2 ${darkMode ? 'text-[rgb(248,244,244)]' : 'text-[rgb(24,59,73)]'
-          }`}
+        className={`text-4xl font-bold text-center mb-2 ${
+          darkMode ? 'text-[rgb(248,244,244)]' : 'text-[rgb(24,59,73)]'
+        }`}
       >
         You Could See Results in as Little as {DaysToResults} Days
       </h2>
       <p
-        className={`text-center font-semibold mb-6 ${darkMode ? 'text-[rgb(248,244,244)]' : 'text-[rgb(24,59,73)]'
-          }`}
+        className={`text-center font-semibold mb-6 ${
+          darkMode ? 'text-[rgb(248,244,244)]' : 'text-[rgb(24,59,73)]'
+        }`}
       >
         With the Right Fuel Source
       </p>
@@ -118,12 +124,12 @@ const ResultsTimelineDisplay: React.FC<ResultsTimelineDisplayProps> = ({ formDat
           change. The wrong plan wastes months.
         </p>
         <p className="text-sm text-[rgb(247,89,80)]">
-          You're already aware — and that's step one. Now imagine pairing that awareness with a
-          plan that shows results in the mirror by day 10.
+          You're already aware — and that's step one. Now imagine pairing that awareness with a plan
+          that shows results in the mirror by day 10.
         </p>
       </div>
     </Card>
   );
-}
+};
 
 export default ResultsTimelineDisplay;

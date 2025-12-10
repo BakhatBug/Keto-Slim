@@ -94,11 +94,14 @@ describe('Form Component', () => {
       await user.type(screen.getByLabelText(/weekly weight loss goal/i), '15');
       await user.type(screen.getByLabelText(/days to see results/i), '60');
 
-      await waitFor(() => {
-        expect(
-          screen.getByText('All fields completed! Ready to see your results.')
-        ).toBeInTheDocument();
-      }, { timeout: 3000 });
+      await waitFor(
+        () => {
+          expect(
+            screen.getByText('All fields completed! Ready to see your results.')
+          ).toBeInTheDocument();
+        },
+        { timeout: 3000 }
+      );
     });
   });
 
@@ -252,5 +255,3 @@ describe('Form Component', () => {
     });
   });
 });
-
-

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import logo from './assets/images/ketoslim.png';
 import './App.css';
 import Form from './components/form';
@@ -14,11 +15,11 @@ import { useTheme } from './contexts/ThemeContext';
 import { FormData } from './types';
 
 function App() {
-  // Use Theme Context instead of local state
+  // Use Theme Context
   const { darkMode } = useTheme();
 
-  // Always start from form page - don't persist across sessions
-  const [currentPage, setCurrentPage] = useState<string>('form');
+  const navigate = useNavigate();
+  const location = useLocation();
 
   // Don't persist form data across sessions
   const [formData, setFormData] = useState<FormData | null>(null);
@@ -33,189 +34,169 @@ function App() {
     }
     // Announce page change to screen readers
     const pageNames: { [key: string]: string } = {
-      form: 'Health Assessment Form',
-      bodyFat: 'Body Fat Results',
-      bmi: 'BMI Results',
-      calories: 'Calorie Recommendations',
-      water: 'Water Intake Recommendations',
-      weightLoss: 'Weight Loss Projections',
-      timeline: 'Results Timeline',
-      finalPlan: 'Your Personalized Plan',
+      '/': 'Health Assessment Form',
+      '/body-fat': 'Body Fat Results',
+      '/bmi': 'BMI Results',
+      '/calories': 'Calorie Recommendations',
+      '/water': 'Water Intake Recommendations',
+      '/weight-loss': 'Weight Loss Projections',
+      '/timeline': 'Results Timeline',
+      '/plan': 'Your Personalized Plan',
     };
-    document.title = `Keto Slim - ${pageNames[currentPage] || 'Health Assessment'}`;
-  }, [currentPage]);
-
-  // Don't persist currentPage and formData to localStorage
-  // This ensures fresh start when dev server restarts
+    document.title = `Keto Slim - ${pageNames[location.pathname] || 'Health Assessment'}`;
+  }, [location]);
 
   const handleFormSubmit = (data: FormData) => {
     setFormData(data);
-    setCurrentPage('bodyFat');
-  };
-
-  const handleBodyFatNext = () => {
-    setCurrentPage('bmi');
-  };
-
-  const handleBMINext = () => {
-    setCurrentPage('calories');
-  };
-
-  const handleBMIBack = () => {
-    setCurrentPage('bodyFat');
-  };
-
-  const handleCaloriesNext = () => {
-    setCurrentPage('water');
-  };
-
-  const handleCaloriesBack = () => {
-    setCurrentPage('bmi');
-  };
-
-  const handleWaterNext = () => {
-    setCurrentPage('weightLoss');
-  };
-
-  const handleWaterBack = () => {
-    setCurrentPage('calories');
-  };
-
-  const handleWeightLossNext = () => {
-    setCurrentPage('resultsTimeline');
-  };
-
-  const handleWeightLossBack = () => {
-    setCurrentPage('water');
-  };
-
-  const handleResultsTimelineNext = () => {
-    setCurrentPage('finalPlan');
-  };
-
-  const handleResultsTimelineBack = () => {
-    setCurrentPage('weightLoss');
+    navigate('/body-fat');
   };
 
   const handleRestartForm = () => {
     setFormData(null);
-    setCurrentPage('form');
-    localStorage.removeItem('formData');
-    localStorage.removeItem('currentPage');
+    navigate('/');
   };
 
-  const renderPage = () => {
-    if (currentPage === 'bodyFat' && formData) {
-      return (
-        <ResultsDisplay
-          formData={formData}
-          onNext={handleBodyFatNext}
-        />
-      );
+  // Protected Route wrapper to ensure form data exists
+  const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+    if (!formData) {
+      return <Navigate to="/" replace />;
     }
+    return <>{children}</>;
+  };
 
-    if (currentPage === 'bmi' && formData) {
-      return (
-        <BMIDisplay
-          formData={formData}
-          onNext={handleBMINext}
-          onBack={handleBMIBack}
-        />
-      );
-    }
+  // Form Page Layout
+  const FormPage = () => (
+    <div
+      className={`min-h-screen w-full flex flex-col items-center transition-colors duration-300 p-4 sm:p-8 ${
+        darkMode ? 'bg-[#0f1419]' : 'bg-[rgb(248,244,244)]'
+      }`}
+      role="application"
+      aria-label="Keto Slim health assessment application"
+    >
+      {/* Theme Toggle */}
+      <ThemeToggle />
 
-    if (currentPage === 'calories' && formData) {
-      return (
-        <CaloriesDisplay
-          formData={formData}
-          onNext={handleCaloriesNext}
-          onBack={handleCaloriesBack}
-        />
-      );
-    }
+      {/* Logo */}
+      <header className="text-center mb-3 sm:mb-4">
+        <img src={logo} alt="Keto Slim Logo" className="w-28 h-9 sm:w-32 sm:h-10 mx-auto" />
+      </header>
 
-    if (currentPage === 'water' && formData) {
-      return (
-        <WaterDisplay
-          formData={formData}
-          onNext={handleWaterNext}
-          onBack={handleWaterBack}
-        />
-      );
-    }
-
-    if (currentPage === 'weightLoss' && formData) {
-      return (
-        <WeightLossDisplay
-          formData={formData}
-          onNext={handleWeightLossNext}
-          onBack={handleWeightLossBack}
-        />
-      );
-    }
-
-    if (currentPage === 'resultsTimeline' && formData) {
-      return (
-        <ResultsTimelineDisplay
-          formData={formData}
-          onNext={handleResultsTimelineNext}
-          onBack={handleResultsTimelineBack}
-        />
-      );
-    }
-
-    if (currentPage === 'finalPlan' && formData) {
-      return (
-        <FinalPlanPage
-          formData={formData}
-          onRestart={handleRestartForm}
-        />
-      );
-    }
-
-    return (
-      <div
-        className={`min-h-screen w-full flex flex-col items-center transition-colors duration-300 p-4 sm:p-8 ${darkMode ? 'bg-[#0f1419]' : 'bg-[rgb(248,244,244)]'
+      {/* Heading */}
+      <section className="text-center mb-5 sm:mb-6">
+        <h1
+          className={`text-2xl sm:text-3xl font-bold font-inter tracking-tight ${
+            darkMode ? 'text-white' : 'text-[rgb(24,59,73)]'
           }`}
-        role="application"
-        aria-label="Keto Slim health assessment application"
-      >
-        {/* Theme Toggle */}
-        <ThemeToggle />
+          style={{ letterSpacing: '-0.5px' }}
+        >
+          <span>Enter Your </span>
+          <span className="text-[rgb(247,89,80)]">Details</span>
+        </h1>
+      </section>
 
-        {/* Logo */}
-        <header className="text-center mb-3 sm:mb-4">
-          <img src={logo} alt="Keto Slim Logo" className="w-28 h-9 sm:w-32 sm:h-10 mx-auto" />
-        </header>
-
-        {/* Heading */}
-        <section className="text-center mb-5 sm:mb-6">
-          <h1
-            className={`text-2xl sm:text-3xl font-bold font-inter tracking-tight ${darkMode ? 'text-white' : 'text-[rgb(24,59,73)]'
-              }`}
-            style={{ letterSpacing: '-0.5px' }}
-          >
-            <span>Enter Your </span>
-            <span className="text-[rgb(247,89,80)]">Details</span>
-          </h1>
-        </section>
-
-        {/* Form */}
-        <div className="w-full max-w-xl px-4">
-          <Form onSubmit={handleFormSubmit} />
-        </div>
+      {/* Form */}
+      <div className="w-full max-w-xl px-4">
+        <Form onSubmit={handleFormSubmit} />
       </div>
-    );
-  };
+    </div>
+  );
 
   return (
     <div
-      key={currentPage}
+      key={location.pathname}
       ref={mainContentRef}
       tabIndex={-1}
       className="focus:outline-none page-transition overflow-x-hidden w-full"
     >
-      {renderPage()}
+      <Routes>
+        <Route path="/" element={<FormPage />} />
+
+        <Route
+          path="/body-fat"
+          element={
+            <ProtectedRoute>
+              <ResultsDisplay formData={formData!} onNext={() => navigate('/bmi')} />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/bmi"
+          element={
+            <ProtectedRoute>
+              <BMIDisplay
+                formData={formData!}
+                onNext={() => navigate('/calories')}
+                onBack={() => navigate('/body-fat')}
+              />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/calories"
+          element={
+            <ProtectedRoute>
+              <CaloriesDisplay
+                formData={formData!}
+                onNext={() => navigate('/water')}
+                onBack={() => navigate('/bmi')}
+              />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/water"
+          element={
+            <ProtectedRoute>
+              <WaterDisplay
+                formData={formData!}
+                onNext={() => navigate('/weight-loss')}
+                onBack={() => navigate('/calories')}
+              />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/weight-loss"
+          element={
+            <ProtectedRoute>
+              <WeightLossDisplay
+                formData={formData!}
+                onNext={() => navigate('/timeline')}
+                onBack={() => navigate('/water')}
+              />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/timeline"
+          element={
+            <ProtectedRoute>
+              <ResultsTimelineDisplay
+                formData={formData!}
+                onNext={() => navigate('/plan')}
+                onBack={() => navigate('/weight-loss')}
+              />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/plan"
+          element={
+            <ProtectedRoute>
+              <FinalPlanPage formData={formData!} onRestart={handleRestartForm} />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Catch all redirect */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
     </div>
   );
 }

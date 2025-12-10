@@ -16,7 +16,15 @@ interface SelectInputProps {
   required?: boolean;
 }
 
-const SelectInput: React.FC<SelectInputProps> = ({ label, id, options, value, onChange, placeholder = 'Select an option', required = false }) => {
+const SelectInput: React.FC<SelectInputProps> = ({
+  label,
+  id,
+  options,
+  value,
+  onChange,
+  placeholder = 'Select an option',
+  required = false,
+}) => {
   const { darkMode } = useTheme();
 
   return (
@@ -55,6 +63,6 @@ const SelectInput: React.FC<SelectInputProps> = ({ label, id, options, value, on
       </select>
     </div>
   );
-}
+};
 
 export default SelectInput;

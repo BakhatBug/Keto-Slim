@@ -104,14 +104,16 @@ const CaloriesDisplay: React.FC<CaloriesDisplayProps> = ({ formData, onNext, onB
       {/* Title */}
       <h2
         id="calorie-title"
-        className={`text-2xl font-bold text-center mb-2 ${darkMode ? 'text-[rgb(248,244,244)]' : 'text-[rgb(24,59,73)]'
-          }`}
+        className={`text-2xl font-bold text-center mb-2 ${
+          darkMode ? 'text-[rgb(248,244,244)]' : 'text-[rgb(24,59,73)]'
+        }`}
       >
         You Should Be Eating Around {Calorie} Calories
       </h2>
       <p
-        className={`text-center font-semibold mb-6 ${darkMode ? 'text-[rgb(248,244,244)]' : 'text-[rgb(24,59,73)]'
-          }`}
+        className={`text-center font-semibold mb-6 ${
+          darkMode ? 'text-[rgb(248,244,244)]' : 'text-[rgb(24,59,73)]'
+        }`}
       >
         But Not All Calories Are Equal
       </p>
@@ -126,19 +128,17 @@ const CaloriesDisplay: React.FC<CaloriesDisplayProps> = ({ formData, onNext, onB
         <p className={darkMode ? 'text-[rgb(181,194,201)]' : 'text-[rgb(19,85,111)]'}>
           Your body burns calories just to stay alive — that's your BMR. Add in movement, and you
           burn even more. Eat less than you burn? You lose weight. Eat more? You store it. Simple
-          math, but the <span className="italic">type</span> of calories still makes or breaks
-          your results.
+          math, but the <span className="italic">type</span> of calories still makes or breaks your
+          results.
         </p>
         <p className={darkMode ? 'text-[rgb(181,194,201)]' : 'text-[rgb(19,85,111)]'}>
           Most people eat low-quality calories that spike cravings, crash energy, and cause fat to
           stick — even if they're technically under their daily limit.
         </p>
-        <p className="text-sm text-[rgb(247,89,80)]">
-          {getCalorieCallout()}
-        </p>
+        <p className="text-sm text-[rgb(247,89,80)]">{getCalorieCallout()}</p>
       </div>
     </Card>
   );
-}
+};
 
 export default CaloriesDisplay;

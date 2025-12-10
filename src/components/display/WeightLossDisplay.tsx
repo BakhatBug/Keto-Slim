@@ -90,16 +90,18 @@ const WeightLossDisplay: React.FC<WeightLossDisplayProps> = ({ formData, onNext,
       {/* Title */}
       <h2
         id="weightloss-title"
-        className={`text-2xl font-bold text-center mb-2 ${darkMode ? 'text-[rgb(248,244,244)]' : 'text-[rgb(24,59,73)]'
-          }`}
+        className={`text-2xl font-bold text-center mb-2 ${
+          darkMode ? 'text-[rgb(248,244,244)]' : 'text-[rgb(24,59,73)]'
+        }`}
       >
         You Could Be Losing
         <br />
         <span className="text-[rgb(247,89,80)]">{WeightLoss} lbs / Week</span>
       </h2>
       <p
-        className={`text-center font-semibold mb-6 ${darkMode ? 'text-[rgb(248,244,244)]' : 'text-[rgb(24,59,73)]'
-          }`}
+        className={`text-center font-semibold mb-6 ${
+          darkMode ? 'text-[rgb(248,244,244)]' : 'text-[rgb(24,59,73)]'
+        }`}
       >
         With the Right Fuel Source
       </p>
@@ -126,6 +128,6 @@ const WeightLossDisplay: React.FC<WeightLossDisplayProps> = ({ formData, onNext,
       </div>
     </Card>
   );
-}
+};
 
 export default WeightLossDisplay;

@@ -79,8 +79,9 @@ const FinalPlanPage: React.FC<FinalPlanPageProps> = ({ formData, onRestart: _onR
   return (
     <>
       <main
-        className={`min-h-screen w-full overflow-x-hidden p-3 sm:p-5 md:p-6 transition-colors duration-300 ${darkMode ? 'bg-[#181a1b]' : 'bg-[#f8f4f4]'
-          }`}
+        className={`min-h-screen w-full overflow-x-hidden p-3 sm:p-5 md:p-6 transition-colors duration-300 ${
+          darkMode ? 'bg-[#181a1b]' : 'bg-[#f8f4f4]'
+        }`}
         role="main"
         aria-label="Your personalized keto plan"
       >
@@ -98,10 +99,9 @@ const FinalPlanPage: React.FC<FinalPlanPageProps> = ({ formData, onRestart: _onR
 
         {/* Main Content Card */}
         <article
-          className={`rounded-2xl shadow-xl border p-4 sm:p-8 w-full max-w-xl mx-auto flex flex-col items-center mb-6 transition-colors duration-300 ${darkMode
-            ? 'bg-[#232627] border-[#2d3133]'
-            : 'bg-white border-gray-200'
-            }`}
+          className={`rounded-2xl shadow-xl border p-4 sm:p-8 w-full max-w-xl mx-auto flex flex-col items-center mb-6 transition-colors duration-300 ${
+            darkMode ? 'bg-[#232627] border-[#2d3133]' : 'bg-white border-gray-200'
+          }`}
           aria-labelledby="plan-title"
         >
           {/* Icon */}
@@ -111,8 +111,9 @@ const FinalPlanPage: React.FC<FinalPlanPageProps> = ({ formData, onRestart: _onR
 
           {/* Title */}
           <h2
-            className={`text-center text-2xl sm:text-3xl font-bold mb-2 ${darkMode ? 'text-[#e0e6e9]' : 'text-[#183b49]'
-              }`}
+            className={`text-center text-2xl sm:text-3xl font-bold mb-2 ${
+              darkMode ? 'text-[#e0e6e9]' : 'text-[#183b49]'
+            }`}
           >
             Your Personalized
             <br />
@@ -120,9 +121,7 @@ const FinalPlanPage: React.FC<FinalPlanPageProps> = ({ formData, onRestart: _onR
           </h2>
 
           {/* Before and After Images */}
-          <div
-            className="relative flex flex-row justify-center items-end gap-18 mb-2 mt-4 w-full min-h-[180px]"
-          >
+          <div className="relative flex flex-row justify-center items-end gap-18 mb-2 mt-4 w-full min-h-[180px]">
             <img
               alt=""
               aria-hidden="true"
@@ -130,7 +129,8 @@ const FinalPlanPage: React.FC<FinalPlanPageProps> = ({ formData, onRestart: _onR
               loading="eager"
               src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20xmlns:xlink='http://www.w3.org/1999/xlink'%20width='243.74'%20height='186.983'%20viewBox='0%200%20243.74%20186.983'%3e%3cdefs%3e%3clinearGradient%20id='linear-gradient'%20x1='0.5'%20y1='-0.034'%20x2='0.5'%20y2='1'%20gradientUnits='objectBoundingBox'%3e%3cstop%20offset='0'%20stop-color='%23fff'%20stop-opacity='0'/%3e%3cstop%20offset='0.227'%20stop-color='%23fff'/%3e%3cstop%20offset='0.493'%20stop-color='%23fff'/%3e%3cstop%20offset='0.759'%20stop-color='%23fff'/%3e%3cstop%20offset='1'%20stop-color='%23fff'%20stop-opacity='0'/%3e%3c/linearGradient%3e%3c/defs%3e%3cg%20id='Group_525'%20data-name='Group%20525'%20transform='translate(-66.631%20-171.088)'%3e%3cpath%20id='Path_129'%20data-name='Path%20129'%20d='M8634-1904.912l93.493,93.491L8634-1717.929v-36.984l56.509-56.508L8634-1867.928Z'%20transform='translate(-8494.52%202076)'%20fill='url(%23linear-gradient)'/%3e%3cpath%20id='Path_131'%20data-name='Path%20131'%20d='M8634-1904.912l93.493,93.491L8634-1717.929v-36.984l56.509-56.508L8634-1867.928Z'%20transform='translate(-8567.368%202076)'%20fill='url(%23linear-gradient)'/%3e%3cpath%20id='Path_130'%20data-name='Path%20130'%20d='M8634-1904.912l93.493,93.491L8634-1717.929v-36.984l56.509-56.508L8634-1867.928Z'%20transform='translate(-8417.121%202076)'%20fill='url(%23linear-gradient)'/%3e%3c/g%3e%3c/svg%3e"
               style={{
-                filter: 'brightness(0) saturate(100%) invert(23%) sepia(99%) saturate(7497%) hue-rotate(353deg) brightness(101%) contrast(101%)',
+                filter:
+                  'brightness(0) saturate(100%) invert(23%) sepia(99%) saturate(7497%) hue-rotate(353deg) brightness(101%) contrast(101%)',
               }}
             />
             <img
@@ -153,18 +153,21 @@ const FinalPlanPage: React.FC<FinalPlanPageProps> = ({ formData, onRestart: _onR
 
           {/* Now / 6 Months Labels */}
           <div
-            className={`flex w-full justify-between items-center mt-2 mb-4 shadow-md rounded-lg py-4 ${darkMode ? 'bg-[#232627]' : 'bg-white'
-              }`}
+            className={`flex w-full justify-between items-center mt-2 mb-4 shadow-md rounded-lg py-4 ${
+              darkMode ? 'bg-[#232627]' : 'bg-white'
+            }`}
           >
             <div
-              className={`w-1/2 text-center font-bold ${darkMode ? 'text-[#e0e6e9]' : 'text-[#183b49]'
-                }`}
+              className={`w-1/2 text-center font-bold ${
+                darkMode ? 'text-[#e0e6e9]' : 'text-[#183b49]'
+              }`}
             >
               Now
             </div>
             <div
-              className={`w-1/2 text-center font-bold ${darkMode ? 'text-[#e0e6e9]' : 'text-[#183b49]'
-                }`}
+              className={`w-1/2 text-center font-bold ${
+                darkMode ? 'text-[#e0e6e9]' : 'text-[#183b49]'
+              }`}
             >
               6 Months
             </div>
@@ -184,16 +187,12 @@ const FinalPlanPage: React.FC<FinalPlanPageProps> = ({ formData, onRestart: _onR
 
           {/* Pricing Section - Now inside the same card */}
           <div className="w-full mt-10 pricing-section">
-            <h2
-              className="text-center text-[22px] sm:text-2xl mb-2 text-[#b5c2c9]"
-            >
+            <h2 className="text-center text-[22px] sm:text-2xl mb-2 text-[#b5c2c9]">
               3 Month Custom Keto Plan
             </h2>
 
             {/* Countdown Timer */}
-            <div
-              className="flex items-center justify-between rounded-lg px-4 py-2 mb-4 bg-[#f75950]"
-            >
+            <div className="flex items-center justify-between rounded-lg px-4 py-2 mb-4 bg-[#f75950]">
               <span className="text-white font-medium text-base">Discount expires in:</span>
               <span className="text-white font-bold text-lg flex items-center gap-1">
                 {formatTime(timeLeft)}
@@ -298,6 +297,6 @@ const FinalPlanPage: React.FC<FinalPlanPageProps> = ({ formData, onRestart: _onR
       )}
     </>
   );
-}
+};
 
 export default FinalPlanPage;

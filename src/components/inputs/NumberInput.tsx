@@ -12,7 +12,16 @@ interface NumberInputProps {
   required?: boolean;
 }
 
-const NumberInput: React.FC<NumberInputProps> = ({ label, id, min, step, placeholder, value, onChange, required = false }) => {
+const NumberInput: React.FC<NumberInputProps> = ({
+  label,
+  id,
+  min,
+  step,
+  placeholder,
+  value,
+  onChange,
+  required = false,
+}) => {
   const { darkMode } = useTheme();
 
   return (
@@ -48,6 +57,6 @@ const NumberInput: React.FC<NumberInputProps> = ({ label, id, min, step, placeho
       />
     </div>
   );
-}
+};
 
 export default NumberInput;

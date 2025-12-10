@@ -33,12 +33,12 @@ global.IntersectionObserver = class IntersectionObserver {
   constructor(_callback: IntersectionObserverCallback, _options?: IntersectionObserverInit) {
     // Mock implementation
   }
-  disconnect() { }
-  observe(_target: Element) { }
+  disconnect() {}
+  observe(_target: Element) {}
   takeRecords(): IntersectionObserverEntry[] {
     return [];
   }
-  unobserve(_target: Element) { }
+  unobserve(_target: Element) {}
 };
 
 // Suppress console errors in tests (optional)

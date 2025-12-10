@@ -36,8 +36,9 @@ const Card: React.FC<CardProps> = ({
   const { darkMode } = useTheme();
   return (
     <main
-      className={`min-h-screen w-full overflow-x-hidden p-3 sm:p-5 md:p-6 transition-colors duration-300 ${darkMode ? 'bg-[rgb(24,26,27)]' : 'bg-[rgb(248,244,244)]'
-        } ${wrapperClassName}`}
+      className={`min-h-screen w-full overflow-x-hidden p-3 sm:p-5 md:p-6 transition-colors duration-300 ${
+        darkMode ? 'bg-[rgb(24,26,27)]' : 'bg-[rgb(248,244,244)]'
+      } ${wrapperClassName}`}
       role="main"
       aria-label={ariaLabel}
     >
@@ -68,10 +69,11 @@ const Card: React.FC<CardProps> = ({
 
       {/* Main Content Card */}
       <article
-        className={`rounded-2xl shadow-xl border p-4 sm:p-8 w-full max-w-xl mx-auto flex flex-col items-center mb-6 card-transition ${darkMode
-          ? 'bg-[rgb(35,38,39)] border-[rgb(45,49,51)] text-[rgb(248,244,244)]'
-          : 'bg-white border-[rgb(229,231,235)] text-[rgb(24,59,73)]'
-          } ${className}`}
+        className={`rounded-2xl shadow-xl border p-4 sm:p-8 w-full max-w-xl mx-auto flex flex-col items-center mb-6 card-transition ${
+          darkMode
+            ? 'bg-[rgb(35,38,39)] border-[rgb(45,49,51)] text-[rgb(248,244,244)]'
+            : 'bg-white border-[rgb(229,231,235)] text-[rgb(24,59,73)]'
+        } ${className}`}
         aria-labelledby={ariaLabelledBy}
       >
         {/* Card Content */}
@@ -82,6 +84,6 @@ const Card: React.FC<CardProps> = ({
       {afterCard}
     </main>
   );
-}
+};
 
 export default Card;

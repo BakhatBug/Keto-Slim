@@ -18,8 +18,9 @@ const ToolsSection: React.FC<ToolsSectionProps> = ({ phoneImage }) => {
     <div className="w-full mt-8 mb-6">
       <div className="text-center mb-6">
         <h3
-          className={`text-xl font-bold ${darkMode ? 'text-[rgb(224,230,233)]' : 'text-[rgb(24,59,73)]'
-            }`}
+          className={`text-xl font-bold ${
+            darkMode ? 'text-[rgb(224,230,233)]' : 'text-[rgb(24,59,73)]'
+          }`}
         >
           Get all the right tools & knowledge.
         </h3>
@@ -31,9 +32,7 @@ const ToolsSection: React.FC<ToolsSectionProps> = ({ phoneImage }) => {
           {tools.map((tool, index) => (
             <div key={index} className="flex items-center gap-3">
               <span className="text-3xl">{tool.icon}</span>
-              <span className="font-medium text-base text-[rgb(247,89,80)]">
-                {tool.text}
-              </span>
+              <span className="font-medium text-base text-[rgb(247,89,80)]">{tool.text}</span>
             </div>
           ))}
         </div>
@@ -45,6 +44,6 @@ const ToolsSection: React.FC<ToolsSectionProps> = ({ phoneImage }) => {
       </div>
     </div>
   );
-}
+};
 
 export default ToolsSection;

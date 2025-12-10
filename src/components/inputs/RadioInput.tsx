@@ -15,7 +15,14 @@ interface RadioInputProps {
   required?: boolean;
 }
 
-const RadioInput: React.FC<RadioInputProps> = ({ label, name, options, value, onChange, required = false }) => {
+const RadioInput: React.FC<RadioInputProps> = ({
+  label,
+  name,
+  options,
+  value,
+  onChange,
+  required = false,
+}) => {
   const { darkMode } = useTheme();
 
   return (
@@ -55,6 +62,6 @@ const RadioInput: React.FC<RadioInputProps> = ({ label, name, options, value, on
       </div>
     </fieldset>
   );
-}
+};
 
 export default RadioInput;

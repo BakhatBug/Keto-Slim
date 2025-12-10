@@ -89,8 +89,9 @@ const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ formData, onNext }) => 
 
       {/* Title */}
       <h1
-        className={`text-center text-[34px] leading-[1.2em] font-semibold font-inter mb-1 ${darkMode ? 'text-[rgb(248,244,244)]' : 'text-[rgb(24,59,73)]'
-          }`}
+        className={`text-center text-[34px] leading-[1.2em] font-semibold font-inter mb-1 ${
+          darkMode ? 'text-[rgb(248,244,244)]' : 'text-[rgb(24,59,73)]'
+        }`}
       >
         Your Body Fat
         <br />
@@ -100,8 +101,9 @@ const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ formData, onNext }) => 
       </h1>
 
       <h2
-        className={`text-center text-[20px] font-semibold font-inter mb-2 ${darkMode ? 'text-[rgb(248,244,244)]' : 'text-[rgb(24,59,73)]'
-          }`}
+        className={`text-center text-[20px] font-semibold font-inter mb-2 ${
+          darkMode ? 'text-[rgb(248,244,244)]' : 'text-[rgb(24,59,73)]'
+        }`}
       >
         Here's Why That Matters
       </h2>
@@ -125,8 +127,9 @@ const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ formData, onNext }) => 
 
       {/* Description Text */}
       <p
-        className={`text-[20px] font-normal font-inter mb-2 ${darkMode ? 'text-[rgb(181,194,201)]' : 'text-[rgb(19,85,111)]'
-          }`}
+        className={`text-[20px] font-normal font-inter mb-2 ${
+          darkMode ? 'text-[rgb(181,194,201)]' : 'text-[rgb(19,85,111)]'
+        }`}
       >
         Your body fat percentage gives a clearer picture than BMI alone. It tells us how much of
         your body is lean mass (muscle, organs, bone) vs stored fat.
@@ -141,6 +144,6 @@ const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ formData, onNext }) => 
       </p>
     </Card>
   );
-}
+};
 
 export default ResultsDisplay;

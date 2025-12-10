@@ -15,8 +15,9 @@ const BenefitsChecklist: React.FC = () => {
       <div className="flex flex-col items-center mb-6">
         <div className="w-full flex flex-col">
           <div
-            className={`font-semibold text-base mb-2 ${darkMode ? 'text-[#e0e6e9]' : 'text-[#183b49]'
-              }`}
+            className={`font-semibold text-base mb-2 ${
+              darkMode ? 'text-[#e0e6e9]' : 'text-[#183b49]'
+            }`}
           >
             Your program will also work on:
           </div>
@@ -24,14 +25,16 @@ const BenefitsChecklist: React.FC = () => {
             {benefits.map((benefit, index) => (
               <li key={index} className="flex items-center gap-2 w-full">
                 <span
-                  className={`text-xl rounded-full border w-7 h-7 flex items-center justify-center text-[#f75950] border-[#f75950] ${darkMode ? 'bg-[#232627]' : 'bg-white'
-                    }`}
+                  className={`text-xl rounded-full border w-7 h-7 flex items-center justify-center text-[#f75950] border-[#f75950] ${
+                    darkMode ? 'bg-[#232627]' : 'bg-white'
+                  }`}
                 >
                   ✔
                 </span>
                 <span
-                  className={`font-medium text-base ${darkMode ? 'text-[#e0e6e9]' : 'text-[#183b49]'
-                    }`}
+                  className={`font-medium text-base ${
+                    darkMode ? 'text-[#e0e6e9]' : 'text-[#183b49]'
+                  }`}
                 >
                   {benefit}
                 </span>
@@ -42,6 +45,6 @@ const BenefitsChecklist: React.FC = () => {
       </div>
     </div>
   );
-}
+};
 
 export default BenefitsChecklist;

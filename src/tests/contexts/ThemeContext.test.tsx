@@ -88,7 +88,7 @@ describe('ThemeContext', () => {
 
     it('should throw error when used outside ThemeProvider', () => {
       // Suppress console.error for this test
-      const spy = vi.spyOn(console, 'error').mockImplementation(() => { });
+      const spy = vi.spyOn(console, 'error').mockImplementation(() => {});
 
       expect(() => {
         renderHook(() => useTheme());

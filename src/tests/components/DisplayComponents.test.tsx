@@ -35,9 +35,7 @@ describe('Display Components', () => {
         </ThemeProvider>
       );
 
-      expect(
-        screen.getByText(/your current level may be slowing metabolism/i)
-      ).toBeInTheDocument();
+      expect(screen.getByText(/your current level may be slowing metabolism/i)).toBeInTheDocument();
     });
 
     it('should display appropriate message for male 25-31% body fat', () => {
@@ -48,9 +46,7 @@ describe('Display Components', () => {
         </ThemeProvider>
       );
 
-      expect(
-        screen.getByText(/your current level may be slowing metabolism/i)
-      ).toBeInTheDocument();
+      expect(screen.getByText(/your current level may be slowing metabolism/i)).toBeInTheDocument();
     });
 
     it('should display appropriate message for male over 32% body fat', () => {
@@ -61,9 +57,7 @@ describe('Display Components', () => {
         </ThemeProvider>
       );
 
-      expect(
-        screen.getByText(/stuck in a constant state of inflammation/i)
-      ).toBeInTheDocument();
+      expect(screen.getByText(/stuck in a constant state of inflammation/i)).toBeInTheDocument();
     });
 
     it('should display appropriate message for female under 31% body fat', () => {
@@ -74,9 +68,7 @@ describe('Display Components', () => {
         </ThemeProvider>
       );
 
-      expect(
-        screen.getByText(/your current level may be slowing metabolism/i)
-      ).toBeInTheDocument();
+      expect(screen.getByText(/your current level may be slowing metabolism/i)).toBeInTheDocument();
     });
 
     it('should call onNext when next button is clicked', async () => {
@@ -315,11 +307,7 @@ describe('Display Components', () => {
     it('should render days to results value', () => {
       render(
         <ThemeProvider>
-          <ResultsTimelineDisplay
-            formData={mockFormData}
-            onNext={mockOnNext}
-            onBack={mockOnBack}
-          />
+          <ResultsTimelineDisplay formData={mockFormData} onNext={mockOnNext} onBack={mockOnBack} />
         </ThemeProvider>
       );
 
@@ -329,11 +317,7 @@ describe('Display Components', () => {
     it('should have next and back buttons', () => {
       render(
         <ThemeProvider>
-          <ResultsTimelineDisplay
-            formData={mockFormData}
-            onNext={mockOnNext}
-            onBack={mockOnBack}
-          />
+          <ResultsTimelineDisplay formData={mockFormData} onNext={mockOnNext} onBack={mockOnBack} />
         </ThemeProvider>
       );
 

@@ -222,9 +222,7 @@ describe('FinalPlanPage and Child Components', () => {
         </ThemeProvider>
       );
 
-      expect(
-        screen.getByText(/trusted by health & nutrition professionals/i)
-      ).toBeInTheDocument();
+      expect(screen.getByText(/trusted by health & nutrition professionals/i)).toBeInTheDocument();
     });
 
     it('should render PMC logo', () => {
